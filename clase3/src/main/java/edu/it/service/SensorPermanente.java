@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bolivarsoft.sensorclima.SensorClima;
+import com.bolivarsoft.sensorclima.TipoClima;
+import com.bolivarsoft.sensorvelocidad.DatosVehiculo;
 import com.bolivarsoft.sensorvelocidad.SensorVelocidad;
 import com.google.gson.Gson;
 
@@ -18,13 +20,15 @@ public class SensorPermanente {
 	@Autowired
 	private Gson gson;
 	
+	@Autowired
+	private EvaluadorMulta evaluadorMulta;
+	
 	public void run() {
 		for (;;) {
-			var datosVehiculo = sensorVelocidad.sensarVehiculo();
-			var clima = sensorClima.sensar();
+			DatosVehiculo datosVehiculo = sensorVelocidad.sensarVehiculo();
+			TipoClima clima = sensorClima.sensar();
 			
-			System.out.println(gson.toJson(datosVehiculo));
-			System.out.println(gson.toJson(clima));
+			evaluadorMulta.evaluar(datosVehiculo, clima);
 		}
 	}
 }
