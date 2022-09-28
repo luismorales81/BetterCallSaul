@@ -5,11 +5,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bolivarsoft.sensorclima.SensorClima;
 import com.bolivarsoft.sensorclima.TipoClima;
 import com.bolivarsoft.sensorvelocidad.DatosVehiculo;
 import com.bolivarsoft.sensorvelocidad.SensorVelocidad;
 import com.google.gson.Gson;
+
+import edu.it.proxy.SensorClimaProxy;
 
 @Service
 public class SensorPermanente {
@@ -19,7 +20,7 @@ public class SensorPermanente {
 	private SensorVelocidad sensorVelocidad;
 	
 	@Autowired
-	private SensorClima sensorClima;
+	private SensorClimaProxy sensorClimaProxy;
 	
 	@Autowired
 	private Gson gson;
@@ -30,7 +31,7 @@ public class SensorPermanente {
 	public void run() {
 		for (;;) {
 			DatosVehiculo datosVehiculo = sensorVelocidad.sensarVehiculo();
-			TipoClima clima = sensorClima.sensar();
+			TipoClima clima = sensorClimaProxy.sensar();
 
 			logger.info(clima.toString());
 			
