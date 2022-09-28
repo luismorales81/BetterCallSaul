@@ -3,6 +3,8 @@ package edu.it.service;
 import java.util.HashMap;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,7 @@ import edu.it.repository.GrabadorMulta;
 
 @Service
 public class EvaluadorMulta {
+	Logger logger = LoggerFactory.getLogger(getClass());
 	private HashMap<VehiculoClima, Integer> mapa = new HashMap<>();
 	
 	@Autowired
@@ -54,6 +57,8 @@ public class EvaluadorMulta {
 		if (datosVehiculo.velocidadMedida <= limiteEstablecido) {
 			return;
 		}
+		
+		logger.info("Se ha de producir un ticket...");
 		
 		var tkt = new Ticket(
 				UUID.randomUUID().toString(),

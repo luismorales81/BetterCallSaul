@@ -1,5 +1,7 @@
 package edu.it.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,8 @@ import com.google.gson.Gson;
 
 @Service
 public class SensorPermanente {
+	Logger logger = LoggerFactory.getLogger(getClass());
+	
 	@Autowired
 	private SensorVelocidad sensorVelocidad;
 	
@@ -27,6 +31,8 @@ public class SensorPermanente {
 		for (;;) {
 			DatosVehiculo datosVehiculo = sensorVelocidad.sensarVehiculo();
 			TipoClima clima = sensorClima.sensar();
+
+			logger.info(clima.toString());
 			
 			evaluadorMulta.evaluar(datosVehiculo, clima);
 		}
