@@ -1,0 +1,14 @@
+1) Crear la base de datos bettercallsaul
+
+2) Levantar el proyecto
+
+3) Ver, que existen 2 implementaciones para GrabadorMulta.
+   Hoy, tuve que optar por elegir una de las dos.
+
+   Puse GrabadorMultaSQL como @Primary
+
+4) Crear un GrabadorMultaAmbosFormatos 
+   Marcarla como @Primary
+
+   Luego que salve tanto en SQL como en JSON.
+
