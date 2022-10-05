@@ -7,16 +7,28 @@ import org.springframework.stereotype.Repository;
 import edu.it.dtos.Ticket;
 
 @Repository
-public class GrabadorMultaSQL implements GrabadorMulta {
+@Primary
+public class GrabadorMultaDosFormatos implements GrabadorMulta {
+	
 	@Autowired
-	private GrabadorMultaRepository grabadorMultaRepository;
+	private GrabadorMultaJSON grabadorMultaJSON;
+	
+	@Autowired
+	private GrabadorMultaSQL grabadorMultaSQL;
 	
 	public void grabar(Ticket tkt) {
 		try {
-			grabadorMultaRepository.save(tkt);
+			grabadorMultaSQL.grabar(tkt);
 		}
 		catch (Exception ex) {
-			ex.printStackTrace();
+			
+		}
+		
+		try {
+			grabadorMultaJSON.grabar(tkt);
+		}
+		catch (Exception ex) {
+			
 		}
 	}
 }
