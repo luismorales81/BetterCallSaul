@@ -2,6 +2,7 @@ package edu.it.controllers;
 
 import java.util.UUID;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,13 +32,17 @@ public class UsuarioController {
 			throw new BadRequestException();
 		}
 		
+		var salt = String.join("__", UUID.randomUUID().toString(), UUID.randomUUID().toString());
+		var passwordParaEncriptar = String.join("__", usuario.password, salt);
+		var passwordEncriptada = DigestUtils.sha256Hex(passwordParaEncriptar);
+		
 		var newUsu = UsuarioEntity
 			.builder()
 			.id(UUID.randomUUID().toString())
 			.nombre(usuario.nombre)
-			.password(usuario.password)
-			.salt("AcA FALTA DEFINIR SALT")
-			.role("FALTA TB")
+			.password(passwordEncriptada)
+			.salt(salt)
+			.role("ROLE_ADMIN")
 			.build();
 		
 		usuarioRepository.save(newUsu);
