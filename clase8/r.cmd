@@ -1,0 +1,1 @@
+java -jar target\BCS-ALL.jar

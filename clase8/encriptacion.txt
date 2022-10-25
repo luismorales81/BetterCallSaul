@@ -1,0 +1,28 @@
+Tres formas de encriptacion
+
+Simetrica (3000 años)
+
+A  EA3fasz54!asldksd   .............................................> EA3fasz54!asldksd B
+
+Asimetrica (HTTPS)
+
+A ClavePublica .....................................................> Clave Privada B
+
+Funciones hash
+
+MD5        64 Bits
+SHA1      128 Bits
+SHA2      224 Bits
+SHA512    512 Bits
+SHA1024  1024 Bits 
+
+Dado un input hace un resumen de todo el mensaje en la cantidad de bits que corresponda.
+
+Hexadecimal es:
+
+0...F donde 0 es equivalente al 0 en decimal
+            F es equivalente al 15 en decimal
+
+0 es 0000 en binario
+F es 1111 en binario
+
