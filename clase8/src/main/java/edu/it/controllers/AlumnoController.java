@@ -2,6 +2,7 @@ package edu.it.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ public class AlumnoController {
 	AlumnoRepository alumnoRepo;
 	
 	@GetMapping
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	public Object getTodosLosAlumnos() {
 		var alumnos = alumnoRepo.findAll();
 		return alumnos;
@@ -59,6 +61,7 @@ public class AlumnoController {
 	}
 	
 	@DeleteMapping(path="/{id}")
+	@Secured({"ROLE_ADMIN"})
 	public void deleteSobreAlumno(@PathVariable("id") String id) {
 		var optAlumno = alumnoRepo.findById(id);
 		if (optAlumno.isEmpty()) {
